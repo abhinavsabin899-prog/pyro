@@ -60,7 +60,7 @@ GIT_TOKEN = getenv("GIT_TOKEN")  # needed if repo is private
 
 # ── Support links ──────────────────────────────────────────────────────────────
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://github.com/shnwazdeveloper/saya-music")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/sector_bot_support")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/sector_updates")
 
 # ── Assistant auto-leave ───────────────────────────────────────────────────────
 AUTO_LEAVING_ASSISTANT = False
