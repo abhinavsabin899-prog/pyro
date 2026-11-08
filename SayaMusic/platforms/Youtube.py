@@ -60,32 +60,66 @@ async def _exec_proc(*args: str) -> Tuple[bytes, bytes]:
             proc.kill()
         return b"", b"timeout"
 
-
 @capture_internal_err
 async def cached_youtube_search(query: str) -> List[Dict]:
+    query = query.strip()
+    if not query:
+        return []
+
     key = f"q:{query}"
     now = time.time()
 
     async with _cache_lock:
-        if key in _cache:
-            ts, val = _cache[key]
-            if now - ts < YOUTUBE_META_TTL:
-                return val
-            _cache.pop(key, None)
-        if len(_cache) > YOUTUBE_META_MAX:
-            _cache.clear()
+        cached = _cache.get(key)
+        if cached and now - cached[0] < YOUTUBE_META_TTL:
+            return cached[1]
+
+    result = []
 
     try:
-        data = await VideosSearch(query, limit=1).next()
+        data = await asyncio.wait_for(
+            VideosSearch(query, limit=1).next(),
+            timeout=15
+        )
         result = data.get("result", [])
     except Exception:
         result = []
 
+    if not result:
+        try:
+            stdout, _ = await _exec_proc(
+                "yt-dlp",
+                "--dump-single-json",
+                "--flat-playlist",
+                "--no-warnings",
+                "--skip-download",
+                f"ytsearch1:{query}"
+            )
+
+            if stdout:
+                data = json.loads(stdout.decode())
+                entries = data.get("entries", [])
+
+                if entries:
+                    item = entries[0]
+                    duration = item.get("duration")
+
+                    if duration is not None:
+                        seconds = int(duration)
+                        item["duration"] = (
+                            f"{seconds // 60}:{seconds % 60:02d}"
+                        )
+
+                    result = [item]
+        except Exception:
+            result = []
+
     if result:
         async with _cache_lock:
-            _cache[key] = (now, result)
+            _cache[key] = (time.time(), result)
 
     return result
+
 
 
 # === Main Class ===
