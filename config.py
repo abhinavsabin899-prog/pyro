@@ -29,10 +29,10 @@ API_HASH = _required("API_HASH")
 BOT_TOKEN = _required("BOT_TOKEN")
 
 OWNER_ID = _required_int("OWNER_ID")
-OWNER_USERNAME = getenv("OWNER_USERNAME", "kidzmc")
-BOT_USERNAME = getenv("BOT_USERNAME", "SexySayaBot")
-BOT_NAME = getenv("BOT_NAME", "Saya Music")
-ASSUSERNAME = getenv("ASSUSERNAME", "musicxsaya")
+OWNER_USERNAME = getenv("OWNER_USERNAME", "Abhi34200")
+BOT_USERNAME = getenv("BOT_USERNAME", "Pyro_gmusic_bot")
+BOT_NAME = getenv("BOT_NAME", "Pyro Music Bot")
+ASSUSERNAME = getenv("ASSUSERNAME", "pyro")
 
 # ── Database & logging ─────────────────────────────────────────────────────────
 MONGO_DB_URI = _required("MONGO_DB_URI")
@@ -60,7 +60,7 @@ GIT_TOKEN = getenv("GIT_TOKEN")  # needed if repo is private
 
 # ── Support links ──────────────────────────────────────────────────────────────
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://github.com/shnwazdeveloper/saya-music")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://github.com/shnwazdeveloper/saya-music/issues")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/sector_bot_support")
 
 # ── Assistant auto-leave ───────────────────────────────────────────────────────
 AUTO_LEAVING_ASSISTANT = False
