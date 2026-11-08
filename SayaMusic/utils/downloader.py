@@ -80,7 +80,7 @@ def get_ytdlp_base_opts() -> Dict[str, object]:
         "retries": 1,
         "fragment_retries": 1,
         "cachedir": str(CACHE_DIR),
-        "ignoreerrors": True,
+        "ignoreerrors": False,
         "merge_output_format": "mp4"
     }
     if cookiefile := get_cookie_file():
