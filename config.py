@@ -54,7 +54,7 @@ API_KEY = getenv("API_KEY", "")
 DEEP_API = getenv("DEEP_API", "")
 
 # ── Git / updates ──────────────────────────────────────────────────────────────
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/shnwazdeveloper/saya-music")
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/kurukshethrathepride/Abhi66.git")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "Master")
 GIT_TOKEN = getenv("GIT_TOKEN")  # needed if repo is private
 
